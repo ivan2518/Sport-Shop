@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="sportShop.Views.GeneralPages.AuthorizationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:sportShop.ViewModels"
+        mc:Ignorable="d" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance Type=viewModels:AuthorizationViewModel, IsDesignTimeCreatable=False}">
+    
+    <Grid Background="Lavender" Height="450" VerticalAlignment="Top">
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Height="42" Width="100" Content="Registration" Command="{Binding NavigateToRegistrationCommand}"/>
+        
+        <!-- Zaгаловок -->
+        <TextBlock HorizontalAlignment="Center" Margin="0,94,0,0" TextWrapping="Wrap" Text="Autorization" VerticalAlignment="Top" Height="41" Width="208" FontSize="36" FontFamily="Monserat"/>
+
+        <!-- строка воода логина -->
+        <TextBlock HorizontalAlignment="Left" Margin="257,137,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Height="26" Width="75" FontSize="24" FontFamily="Monserat" RenderTransformOrigin="0.439,1.179"/>
+        <TextBox Text="{Binding Login}" HorizontalAlignment="Center" Margin="0,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="286" Height="30" FontSize="22"/>
+
+        <!-- строка ввода пароля -->
+        <TextBlock HorizontalAlignment="Left" Margin="257,196,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Height="28" Width="102" FontSize="24" FontFamily="Monserat"  RenderTransformOrigin="0.439,1.179"/>
+        <TextBox Text="{Binding Password}" HorizontalAlignment="Center"  Margin="0,225,0,0" VerticalAlignment="Top" Width="286" Height="30" FontSize="22"/>
+
+        <!-- кнопка проверки -->
+        <Button Content="Submit" Command="{Binding SubmitAuthCommand}" HorizontalAlignment="Left" Margin="312,307,0,0" VerticalAlignment="Top" Height="42" Width="192" FontSize="22" FontFamily="Monserat" Background="#FFD48E28"/>
+    </Grid>
+</UserControl>

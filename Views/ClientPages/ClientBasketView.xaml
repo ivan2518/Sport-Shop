@@ -1,0 +1,59 @@
+<UserControl x:Class="sportShop.Views.ClientPages.ClientBasketView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:sportShop.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="300" x:Name="ClientBackPage"
+             d:DataContext="{d:DesignInstance Type=viewModels:ClientBasketViewModel, IsDesignTimeCreatable=False}" Height="319">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" Grid.Column="1" ItemsSource="{Binding ProductGroups}"
+                  AutoGenerateColumns="False" SelectionMode="Extended" CanUserResizeRows="False"
+                  CanUserSortColumns="True" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="Выбрать" Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Width="auto" MinWidth="20" />
+                <DataGridTextColumn Header="Название" Binding="{Binding Product.Name}" Width="*" MinWidth="100"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Header="Описание" Binding="{Binding Product.ProductType.Name}" Width="*"
+                                    MinWidth="250"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="*" MinWidth="50" IsReadOnly="True" />
+                <DataGridTextColumn Header="Скидка"
+                                    Binding="{Binding Product.Sale, UpdateSourceTrigger=PropertyChanged}"
+                                    Width="*" MinWidth="50" IsReadOnly="True" />
+                <DataGridTextColumn Header="Количество" Binding="{Binding Count, UpdateSourceTrigger=PropertyChanged}"
+                                    Width="*" MinWidth="50" />
+                <DataGridTextColumn Header="Цена со скидкой"
+                                    Binding="{Binding DiscountedPrice, UpdateSourceTrigger=PropertyChanged}" Width="*"
+                                    MinWidth="50" IsReadOnly="True" />
+                <DataGridTextColumn Header="Производитель" Binding="{Binding Product.Fabric.Name}" Width="*"
+                                    MinWidth="50" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Column="0" Grid.Row="0" Content="Назад" Height="30" VerticalAlignment="Top"
+                Command="{Binding NavigateClientProductPage}" />
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center">
+            <TextBlock
+                Text="{Binding TotalPriceWithOutSale, StringFormat=Цена без скдики {0} рублей, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock
+                Text="{Binding TotalPriceWithSale, StringFormat=Цена со скдикой {0} рублей, UpdateSourceTrigger=PropertyChanged}" Height="3" />
+            <TextBlock
+                Text="{Binding TotalSale, StringFormat=Общая скидка {0} рублей, UpdateSourceTrigger=PropertyChanged}" />
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding DeleteProductsCommand}" Content="Удалить" />
+                <Button Command="{Binding BuyProductsCommand}" Content="Купить" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
